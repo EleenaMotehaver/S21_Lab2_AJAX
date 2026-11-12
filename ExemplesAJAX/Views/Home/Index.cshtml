@@ -5,13 +5,49 @@
 @section Scripts{
     <script>
         // TODO: Écrire votre script
+        $(document).ready(function ()
+        {
+            $.get("/Home/Partielle", function (data)
+            {
+                $("#contenuPartiel").html(data);
+            });
+        });
+
+        function chargerPartielle2() {
+
+            let data = {
+                qty: $("#qty").val(),
+                texte: $("#texte").val()
+            };
+
+            console.log(data);
+
+            $.get("/Home/Partielle2", data, function(result) {
+                $("#contenuPartiel2").html(result);
+            });
+
+        }
     </script>
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <!--Utiliser ce div pour afficher la 1ere vue partielle-->
-    <div></div>
+    <div id="contenuPartiel"></div>
     <!--Utiliser ce div pour afficher la 2e vue partielle-->
-    <div></div>
+    <input type="text" id="texte" placeholder="Texte">
+    <input type="number" id="qty" placeholder="Quantité">
+    
+
+    <button onclick="chargerPartielle2()">
+        Envoyer
+    </button>
+
+    <div id="contenuPartiel2"></div>
 </div>
+
+
+
+    
+
+
